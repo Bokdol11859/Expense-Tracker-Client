@@ -41,7 +41,7 @@ export const Login = React.memo(() => {
               </div>
               <div className="flex items-center justify-center mt-4 space-x-4">
                 <div className="text-sm">
-                  Don't Have An Account?{" "}
+                  {"Don't Have An Account?"}
                   <Link className="text-black hover:underline" href="/signup">
                     Sign Up Here!
                   </Link>
