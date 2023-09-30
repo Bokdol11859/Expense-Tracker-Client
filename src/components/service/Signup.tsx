@@ -8,69 +8,63 @@ import { GithubIcon, GoogleIcon } from "@/icons";
 
 export const Signup = React.memo(() => {
   return (
-    <div className="flex flex-col overflow-auto h-[calc(100%-60px)]">
-      <main className="flex flex-1 flex-col gap-4 p-2 md:gap-8 md:p-3 lg:flex-row">
-        <div className="flex-1 rounded-lg border border-zinc-200 border-dashed dark:border-zinc-800 px-10">
-          <div className="p-6 flex items-center justify-center h-full w-full">
-            <div className="space-y-4 max-w-[520px] w-full">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="first-name">First Name</Label>
-                  <Input id="first-name" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="last-name">Last Name</Label>
-                  <Input id="last-name" required />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" required type="email" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" required type="password" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password-validation">Password Validation</Label>
-                <Input id="password-validation" required type="password" />
-              </div>
-              <Button className="w-full" type="submit">
-                Sign Up
-              </Button>
-              <div className="flex justify-center my-4">
-                <div className="border-b w-1/4 self-center my-auto" />
-                <span className="px-2 text-gray-500 text-sm uppercase">
-                  or continue with
-                </span>
-                <div className="border-b w-1/4 self-center" />
-              </div>
-              <div className="flex items-center justify-center mt-4 space-x-4">
-                <Button
-                  className="w-full bg-transparent text-black border border-black py-2 rounded-md flex items-center justify-center hover:text-white"
-                  type="button"
-                >
-                  <GithubIcon />
-                  Sign Up with Github
-                </Button>
-                <Button
-                  className="w-full bg-transparent text-black border border-black py-2 rounded-md flex items-center justify-center hover:text-white"
-                  type="button"
-                >
-                  <GoogleIcon />
-                  Sign Up with Google
-                </Button>
-              </div>
-              <div className="mt-4 text-center text-sm">
-                Have an account?{" "}
-                <Link className="hover:underline" href="/login">
-                  Login Here!
-                </Link>
-              </div>
-            </div>
+    <div className="p-6 flex items-center justify-center h-full w-full">
+      <div className="space-y-4 max-w-[520px] w-full">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="first-name">First Name</Label>
+            <Input id="first-name" required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="last-name">Last Name</Label>
+            <Input id="last-name" required />
           </div>
         </div>
-      </main>
+        <div className="space-y-2">
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" required type="email" />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="password">Password</Label>
+          <Input id="password" required type="password" />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="password-validation">Password Validation</Label>
+          <Input id="password-validation" required type="password" />
+        </div>
+        <Button className="w-full" type="submit">
+          Sign Up
+        </Button>
+        <div className="flex justify-center my-4">
+          <div className="border-b w-1/4 self-center my-auto" />
+          <span className="px-2 text-gray-500 text-sm uppercase">
+            or continue with
+          </span>
+          <div className="border-b w-1/4 self-center" />
+        </div>
+        <div className="flex items-center justify-center mt-4 space-x-4">
+          <Button
+            className="w-full bg-transparent text-black border border-black py-2 rounded-md flex items-center justify-center hover:text-white"
+            type="button"
+          >
+            <GithubIcon />
+            Sign Up with Github
+          </Button>
+          <Button
+            className="w-full bg-transparent text-black border border-black py-2 rounded-md flex items-center justify-center hover:text-white"
+            type="button"
+          >
+            <GoogleIcon />
+            Sign Up with Google
+          </Button>
+        </div>
+        <div className="mt-4 text-center text-sm">
+          Have an account?{" "}
+          <Link className="hover:underline" href="/login">
+            Login Here!
+          </Link>
+        </div>
+      </div>
     </div>
   );
 });
