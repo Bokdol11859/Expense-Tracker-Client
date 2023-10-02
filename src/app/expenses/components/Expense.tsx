@@ -2,7 +2,13 @@ import Link from "next/link";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { DashboardIcon, ExpenseIcon, HomeIcon } from "@/icons";
-import { TopNavigationBar } from "@/components/TopNavigationBar.tsx";
+import { TopNavigationBar } from "@/components/TopNavigationBar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import React from "react";
 
 export function Expense() {
   return (
@@ -36,7 +42,7 @@ export function Expense() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-900 flex items-center justify-between">
                     Movie with friends
-                    <Button variant="ghost">...</Button>
+                    <ExtraButton />
                   </td>
                 </tr>
                 <tr>
@@ -50,7 +56,7 @@ export function Expense() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-900 flex items-center justify-between">
                     Electricity bill
-                    <Button variant="ghost">...</Button>
+                    <ExtraButton />
                   </td>
                 </tr>
                 <tr>
@@ -64,7 +70,7 @@ export function Expense() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-900 flex items-center justify-between">
                     Dinner at a restaurant
-                    <Button variant="ghost">...</Button>
+                    <ExtraButton />
                   </td>
                 </tr>
                 <tr>
@@ -78,7 +84,7 @@ export function Expense() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-900 flex items-center justify-between">
                     Weekly groceries
-                    <Button variant="ghost">...</Button>
+                    <ExtraButton />
                   </td>
                 </tr>
               </tbody>
@@ -89,3 +95,25 @@ export function Expense() {
     </div>
   );
 }
+
+const ExtraButton = React.memo(() => {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="ghost">...</Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-28 p-0">
+        <div className="flex flex-col">
+          <p className="p-4 border-b-2 font-semibold text-zinc-900 hover:bg-slate-100 cursor-pointer">
+            Edit
+          </p>
+          <p className="p-4 font-semibold text-red-500 hover:bg-slate-100 cursor-pointer">
+            Delete
+          </p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+});
+
+ExtraButton.displayName = "ExtraButton";
