@@ -15,17 +15,12 @@ const tabs: {
   {
     label: "Home",
     value: "/",
-    icon: <HomeIcon />,
+    icon: <DashboardIcon />,
   },
   {
     label: "Expenses",
     value: "/expenses",
     icon: <ExpenseIcon />,
-  },
-  {
-    label: "Dashboard",
-    value: "/dashboard",
-    icon: <DashboardIcon />,
   },
 ];
 

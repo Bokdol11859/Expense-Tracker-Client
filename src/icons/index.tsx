@@ -2,20 +2,20 @@ import React from "react";
 
 export const LogoIcon = React.memo(() => (
   <svg
-    className=" h-6 w-6"
-    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
     height="24"
+    viewBox="0 0 24 24"
+    fill="none"
     stroke="currentColor"
+    strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    strokeWidth="2"
-    viewBox="0 0 24 24"
-    width="24"
-    xmlns="http://www.w3.org/2000/svg"
+    className="lucide lucide-badge-dollar-sign"
   >
-    <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" />
-    <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9" />
-    <path d="M12 3v6" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+    <path d="M12 18V6" />
   </svg>
 ));
 
@@ -54,9 +54,8 @@ export const ExpenseIcon = React.memo(() => (
     width="24"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="8" cy="21" r="1" />
-    <circle cx="19" cy="21" r="1" />
-    <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+    <line x1="12" x2="12" y1="2" y2="22" />
+    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
   </svg>
 ));
 
@@ -143,3 +142,66 @@ export const CommandIcon = React.memo(() => (
 ));
 
 CommandIcon.displayName = "CommandIcon";
+
+export const GraphIcon = React.memo(() => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="lucide lucide-bar-chart-3"
+  >
+    <path d="M3 3v18h18" />
+    <path d="M18 17V9" />
+    <path d="M13 17V5" />
+    <path d="M8 17v-3" />
+  </svg>
+));
+
+GraphIcon.displayName = "GraphIcon";
+
+export const CircleDollarIcon = React.memo(() => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="lucide lucide-circle-dollar-sign"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+    <path d="M12 18V6" />
+  </svg>
+));
+
+CircleDollarIcon.displayName = "CircleDollarIcon";
+
+export const TrendingUpIcon = React.memo(() => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="lucide lucide-trending-up"
+  >
+    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+    <polyline points="16 7 22 7 22 13" />
+  </svg>
+));
+
+TrendingUpIcon.displayName = "TrendingUpIcon";

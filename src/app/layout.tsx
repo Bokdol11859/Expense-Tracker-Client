@@ -25,7 +25,7 @@ export default function RootLayout({
           className="grid h-screen min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]"
         >
           <LeftNavigationBar />
-          <div>
+          <div className="flex flex-col w-full h-full">
             <TopNavigationBar />
             {children}
             <Analytics />
