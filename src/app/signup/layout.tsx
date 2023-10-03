@@ -1,4 +1,4 @@
-import { CommandIcon } from "@/icons";
+import { CommandIcon } from "@/common/icons";
 import { Metadata } from "next";
 import React from "react";
 
@@ -14,9 +14,9 @@ export default function SignupLayout({
 }) {
   return (
     <div className="flex flex-col overflow-auto h-[calc(100%-60px)]">
-      <main className="flex flex-1 flex-col gap-4 p-2 h-full md:gap-8 md:p-3 lg:flex-row">
-        <div className="flex-1 h-full rounded-lg border border-zinc-200 border-dashed dark:border-zinc-800 flex">
-          <div className="w-full h-full bg-zinc-900 rounded-l-lg hidden 2xl:block">
+      <main className="flex flex-1 flex-col h-full gap-8 p-3 lg:flex-row">
+        <div className="flex-1 h-full rounded-lg border border-zinc-200 dark:border-zinc-800 flex">
+          <div className="w-full h-full bg-zinc-900 rounded-l-lg block">
             <div className="w-full h-full flex flex-col items-center justify-between p-4">
               <div className="w-full text-white flex gap-2 items-center justify-start">
                 <CommandIcon />
@@ -24,7 +24,7 @@ export default function SignupLayout({
               </div>
               <div></div>
             </div>
-          </div>{" "}
+          </div>
           <div className="w-full h-full">{children}</div>
         </div>
       </main>

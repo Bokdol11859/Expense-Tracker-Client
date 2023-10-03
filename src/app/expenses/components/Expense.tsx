@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
-import { DashboardIcon, ExpenseIcon, HomeIcon } from "@/icons";
-import { TopNavigationBar } from "@/components/TopNavigationBar";
+import { Calendar } from "@/common/components/ui/calendar";
+import { Button } from "@/common/components/ui/button";
+import { TopNavigationBar } from "@/common/components/TopNavigationBar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/common/components/ui/popover";
 import React from "react";
+import { ExtraButton } from "@/common/components/ExtraButton/ExtraButton";
 
 export function Expense() {
   return (
@@ -95,25 +95,3 @@ export function Expense() {
     </div>
   );
 }
-
-const ExtraButton = React.memo(() => {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="ghost">...</Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-28 p-0">
-        <div className="flex flex-col">
-          <p className="p-4 border-b-2 font-semibold text-zinc-900 hover:bg-slate-100 cursor-pointer">
-            Edit
-          </p>
-          <p className="p-4 font-semibold text-red-500 hover:bg-slate-100 cursor-pointer">
-            Delete
-          </p>
-        </div>
-      </PopoverContent>
-    </Popover>
-  );
-});
-
-ExtraButton.displayName = "ExtraButton";

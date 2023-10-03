@@ -1,5 +1,5 @@
-import { LeftNavigationBar } from "@/components/LeftNavigationBar";
-import { TopNavigationBar } from "@/components/TopNavigationBar";
+import { LeftNavigationBar } from "@/common/components/LeftNavigationBar";
+import { TopNavigationBar } from "@/common/components/TopNavigationBar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -22,10 +22,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <div
           key="1"
-          className="grid h-screen min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr] max-w-[1500px] m-auto border-x"
+          className="grid h-full overflow-hidden grid-cols-[280px_1fr] w-full m-auto border-x"
         >
           <LeftNavigationBar />
-          <div className="flex flex-col w-full h-full">
+          <div className="flex flex-col w-full h-full min-w-[1200px]">
             <TopNavigationBar />
             {children}
             <Analytics />

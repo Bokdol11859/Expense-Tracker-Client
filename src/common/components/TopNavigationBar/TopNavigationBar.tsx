@@ -4,6 +4,28 @@ import React from "react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 
+const currentDate = new Date();
+
+// Array of month names
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const formattedDate = `${
+  monthNames[currentDate.getMonth()]
+} ${currentDate.getFullYear()}`;
+
 export const TopNavigationBar = React.memo(() => {
   const router = useRouter();
 
@@ -16,8 +38,8 @@ export const TopNavigationBar = React.memo(() => {
   }, [router]);
 
   return (
-    <header className="sticky top-0 flex h-[60px] items-center justify-between border-b bg-zinc-100/40 px-6 dark:bg-zinc-800/40">
-      <div className="text-md font-medium">{new Date().toDateString()}</div>
+    <header className="sticky flex-shrink-0 top-0 flex h-[60px] items-center justify-between border-b bg-zinc-100/40 px-6 dark:bg-zinc-800/40">
+      <div className="text-md font-medium">{formattedDate}</div>
       <div className="flex gap-2">
         <Button
           className="px-4 py-2"
