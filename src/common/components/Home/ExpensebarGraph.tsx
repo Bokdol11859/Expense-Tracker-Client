@@ -52,6 +52,7 @@ export const ExpenseBarGraph = React.memo(() => {
         },
       },
       x: {
+        display: false,
         beginAtZero: true,
         grid: {
           display: false,
@@ -86,7 +87,7 @@ export const ExpenseBarGraph = React.memo(() => {
   };
 
   return (
-    <Card className="col-span-2 row-span-3 flex flex-col">
+    <Card className="col-span-2 row-span-4 flex flex-col">
       <CardHeader>
         <CardTitle className="flex justify-between">
           Overview
@@ -95,7 +96,7 @@ export const ExpenseBarGraph = React.memo(() => {
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent className="w-full h-full">
+      <CardContent className="w-full h-full p-2 md:p-6">
         <div className="w-full h-full flex items-center justify-center">
           <Bar data={data} options={options} />
         </div>

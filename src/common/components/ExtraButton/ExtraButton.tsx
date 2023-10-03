@@ -8,12 +8,12 @@ export const ExtraButton = React.memo(() => {
       <PopoverTrigger asChild>
         <Button variant="ghost">...</Button>
       </PopoverTrigger>
-      <PopoverContent className="w-28 p-0">
+      <PopoverContent className="w-20 p-0">
         <div className="flex flex-col">
-          <p className="p-4 border-b-2 font-semibold text-zinc-900 hover:bg-slate-100 cursor-pointer">
+          <p className="p-4 border-b-[1px] text-xs font-medium text-zinc-900 hover:bg-slate-100 cursor-pointer">
             Edit
           </p>
-          <p className="p-4 font-semibold text-red-500 hover:bg-slate-100 cursor-pointer">
+          <p className="p-4 text-xs font-medium text-red-500 hover:bg-slate-100 cursor-pointer">
             Delete
           </p>
         </div>

@@ -8,16 +8,10 @@ import { TopExpense } from "./TopExpense";
 
 export const Home = React.memo(() => {
   return (
-    <div className="flex-grow flex-1 w-full h-full grid grid-cols-3 grid-rows-4 gap-4 p-6">
+    <div className="w-full h-full overflow-y-scroll gap-4 p-6 flex flex-col lg:grid lg:grid-cols-3 lg:grid-rows-4s">
       <ExpenseBarGraph />
       <TotalExpense />
       <TopExpense />
-      <Card className="col-span-1 row-span-1">
-        <CardHeader>{/* <CardTitle>This is Graph</CardTitle> */}</CardHeader>
-      </Card>
-      <Card className="col-span-1 row-span-1">
-        <CardHeader>{/* <CardTitle>This is Graph</CardTitle> */}</CardHeader>
-      </Card>
     </div>
   );
 });

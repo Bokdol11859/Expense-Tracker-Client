@@ -4,7 +4,7 @@ import { CircleDollarIcon } from "@/common/icons";
 
 export const TotalExpense = React.memo(() => {
   return (
-    <Card className="col-span-1 flex flex-col h-full">
+    <Card className="col-span-1 flex flex-col h-full w-full">
       <CardHeader>
         <CardTitle className="flex justify-between">
           Total Expense
@@ -14,7 +14,7 @@ export const TotalExpense = React.memo(() => {
         </CardTitle>
       </CardHeader>
       <CardContent className="flex items-center justify-center h-full">
-        <p className="text-6xl font-bold">$ 10221.76</p>
+        <p className="text-4xl font-bold">$ 10221.76</p>
       </CardContent>
     </Card>
   );

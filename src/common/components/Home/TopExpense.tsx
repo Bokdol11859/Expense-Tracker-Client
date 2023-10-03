@@ -61,7 +61,7 @@ const dummyData: { cost: number; description: string }[] = [
 
 export const TopExpense = React.memo(() => {
   return (
-    <Card className="col-span-1 row-span-3 flex flex-col">
+    <Card className="col-span-1 row-span-3 flex flex-col w-full">
       <CardHeader className="flex-shrink-0">
         <CardTitle className="flex justify-between">
           Top Expenses
@@ -88,7 +88,7 @@ export const TopExpense = React.memo(() => {
                 <td className="px-6 py-4 whitespace-nowrap text-md font-bold text-zinc-900">
                   ${cost}
                 </td>
-                <td className="flex w-[250px] px-6 py-4 whitespace-nowrap overflow-hidden text-sm text-zinc-900 text-ellipsis">
+                <td className="flex w-[200px] px-6 py-4 whitespace-nowrap overflow-hidden text-sm text-zinc-900 text-ellipsis">
                   {description}
                 </td>
               </tr>

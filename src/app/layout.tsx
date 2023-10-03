@@ -20,12 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div
-          key="1"
-          className="grid h-full overflow-hidden grid-cols-[280px_1fr] w-full m-auto border-x"
-        >
+        <div key="1" className="flex h-full w-full m-auto border-x">
           <LeftNavigationBar />
-          <div className="flex flex-col w-full h-full min-w-[1200px]">
+          <div className="flex flex-col w-full h-full">
             <TopNavigationBar />
             {children}
             <Analytics />
