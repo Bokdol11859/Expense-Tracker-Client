@@ -27,7 +27,7 @@ export const Home = React.memo(() => {
           </CardTitle>
         </CardHeader>
         <CardContent className="flex items-center justify-center h-full">
-          <p className={cn("text-7xl", teko.className)}>$ 10221.76</p>
+          <p className="text-6xl font-bold">$ 10221.76</p>
         </CardContent>
       </Card>
       <Card className="col-span-1 row-span-3">

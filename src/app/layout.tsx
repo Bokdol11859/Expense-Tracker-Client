@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div
           key="1"
-          className="grid h-screen min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]"
+          className="grid h-screen min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr] max-w-[1500px] m-auto border-x"
         >
           <LeftNavigationBar />
           <div className="flex flex-col w-full h-full">
