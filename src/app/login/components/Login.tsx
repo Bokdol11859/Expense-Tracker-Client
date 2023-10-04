@@ -7,7 +7,7 @@ import { GithubIcon, GoogleIcon } from "@/common/icons";
 
 export const Login = React.memo(() => {
   return (
-    <div className="px-20 py-4 h-full flex items-center justify-center ">
+    <div className="p-6 h-full flex items-center justify-center ">
       <div className="space-y-4 max-w-[520px] w-full">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
@@ -18,7 +18,7 @@ export const Login = React.memo(() => {
           <Input id="password" required type="password" />
         </div>
         <Button className="w-full" type="submit">
-          Log in
+          Sign In
         </Button>
         <div className="flex items-center justify-center mt-4 space-x-4">
           <Button
@@ -26,14 +26,14 @@ export const Login = React.memo(() => {
             type="button"
           >
             <GithubIcon />
-            Log in with Github
+            Sign In with Github
           </Button>
           <Button
             className="w-full bg-transparent text-black border border-black py-2 rounded-md flex items-center justify-center hover:text-white"
             type="button"
           >
             <GoogleIcon />
-            Log in with Google
+            Sign In with Google
           </Button>
         </div>
         <div className="flex items-center justify-center mt-4 space-x-4">

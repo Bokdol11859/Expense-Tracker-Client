@@ -36,11 +36,11 @@ export const Signup = React.memo(() => {
           Sign Up
         </Button>
         <div className="flex justify-center my-4">
-          <div className="border-b w-1/4 self-center my-auto" />
+          <div className="border-b w-[20%] self-center my-auto" />
           <span className="px-2 text-gray-500 text-sm uppercase">
             or continue with
           </span>
-          <div className="border-b w-1/4 self-center" />
+          <div className="border-b w-[20%] self-center" />
         </div>
         <div className="flex items-center justify-center mt-4 space-x-4">
           <Button

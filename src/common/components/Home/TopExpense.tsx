@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { CircleDollarIcon, TrendingUpIcon } from "@/common/icons";
-import { ExtraButton } from "../ExtraButton/ExtraButton";
+import { ExtraButton } from "../../../app/expenses/components/ExtraButton";
 
 const dummyData: { cost: number; description: string }[] = [
   {

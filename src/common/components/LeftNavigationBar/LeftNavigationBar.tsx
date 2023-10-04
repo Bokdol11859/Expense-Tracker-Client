@@ -29,11 +29,11 @@ const tabs: {
     value: "/expenses",
     icon: <ExpenseIcon />,
   },
-  {
-    label: "Stocks",
-    value: "/stocks",
-    icon: <StockIcon />,
-  },
+  // {
+  //   label: "Stocks",
+  //   value: "/stocks",
+  //   icon: <StockIcon />,
+  // },
 ];
 
 export const LeftNavigationBar = React.memo(
