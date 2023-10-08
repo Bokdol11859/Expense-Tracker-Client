@@ -44,6 +44,8 @@ export const ExpenseHeader = React.memo(() => {
 
   const isFullMonthDifference = React.useCallback(
     (start: Date, end: Date): boolean => {
+      if(start.getDate() !== 1) return false;
+
       const nextMonthStart = new Date(
         start.getFullYear(),
         start.getMonth() + 1,
