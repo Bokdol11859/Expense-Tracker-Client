@@ -1,7 +1,9 @@
 "use client";
 
+import { AlertDialogTrigger } from "@/common/components/ui/alert-dialog";
 import { Button } from "@/common/components/ui/button";
 import { Calendar } from "@/common/components/ui/calendar";
+import { DialogTrigger } from "@/common/components/ui/dialog";
 import {
   Popover,
   PopoverContent,
@@ -10,6 +12,7 @@ import {
 import { cn } from "@/common/lib/utils";
 import { CalendarIcon, PlusIcon } from "@radix-ui/react-icons";
 import { addDays, differenceInCalendarDays, format } from "date-fns";
+
 import React from "react";
 import { DateRange } from "react-day-picker";
 
@@ -162,10 +165,15 @@ export const ExpenseHeader = React.memo(() => {
           </PopoverContent>
         </Popover>
       </div>
-      <Button className="flex-shrink-0 hidden md:block">New Expense</Button>
-      <Button size={"icon"} className="flex-shrink-0 block md:hidden">
-        <PlusIcon className="m-auto" />
-      </Button>
+
+      <DialogTrigger asChild>
+        <Button className="flex-shrink-0 hidden md:block">New Expense</Button>
+      </DialogTrigger>
+      <DialogTrigger asChild>
+        <Button size={"icon"} className="flex-shrink-0 block md:hidden">
+          <PlusIcon className="m-auto" />
+        </Button>
+      </DialogTrigger>
     </div>
   );
 });
