@@ -8,7 +8,7 @@ import { GithubIcon, GoogleIcon } from "@/common/icons";
 
 export const Signup = React.memo(() => {
   return (
-    <div className="p-6 flex items-center justify-center h-full w-full">
+    <div className="p-2 md:p-6 flex items-center justify-center h-full w-full">
       <div className="space-y-4 max-w-[520px] w-full">
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
@@ -42,20 +42,20 @@ export const Signup = React.memo(() => {
           </span>
           <div className="border-b w-[20%] self-center" />
         </div>
-        <div className="flex items-center justify-center mt-4 space-x-4">
+        <div className="flex items-center justify-center mt-4 gap-2">
           <Button
             className="w-full bg-transparent text-black border border-black py-2 rounded-md flex items-center justify-center hover:text-white"
             type="button"
           >
             <GithubIcon />
-            Sign Up with Github
+            Github
           </Button>
           <Button
             className="w-full bg-transparent text-black border border-black py-2 rounded-md flex items-center justify-center hover:text-white"
             type="button"
           >
             <GoogleIcon />
-            Sign Up with Google
+            Google
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">

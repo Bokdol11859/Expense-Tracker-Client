@@ -1,6 +1,5 @@
 "use client";
 
-import { AlertDialogTrigger } from "@/common/components/ui/alert-dialog";
 import { Button } from "@/common/components/ui/button";
 import { Calendar } from "@/common/components/ui/calendar";
 import { DialogTrigger } from "@/common/components/ui/dialog";
@@ -39,143 +38,149 @@ const getDateRangeFromDate = (
   return "Free";
 };
 
-export const ExpenseHeader = React.memo(() => {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(),
-    to: addDays(new Date(), 0),
-  });
-  const [dateRange, setDateRange] = React.useState<SelectedDateRange>("Day");
+export const ExpenseHeader = React.memo(
+  ({
+    date,
+    setDate,
+    onCreateButtonClick,
+  }: {
+    date: DateRange | undefined;
+    setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
+    onCreateButtonClick: () => void;
+  }) => {
+    const [dateRange, setDateRange] = React.useState<SelectedDateRange>("Day");
 
-  const formattedDate = React.useMemo((): React.ReactElement => {
-    if (!date || !date.from || !date.to) return <span>Pick a date</span>;
+    const formattedDate = React.useMemo((): React.ReactElement => {
+      if (!date || !date.from || !date.to) return <span>Pick a date</span>;
 
-    switch (dateRange) {
-      case "Day":
-        return <>{format(date.from, "LLL dd y")}</>;
-      case "Free":
-      case "Week":
-        return (
-          <>
-            {format(date.from, "LLL dd y")} - {format(date.to, "LLL dd y")}
-          </>
-        );
-      case "Month":
-        return <>{format(date.from, "LLLL y")}</>;
-      default:
-        throw new Error("Impossible");
-    }
-  }, [date, dateRange]);
-
-  const onDateRangeClick = React.useCallback(
-    (dateRange: RestrictedSelectedDateRange) => {
-      const today = new Date();
       switch (dateRange) {
         case "Day":
-          setDate({
-            from: today,
-            to: today,
-          });
-          setDateRange("Day");
-          return;
-
+          return <>{format(date.from, "LLL dd y")}</>;
+        case "Free":
         case "Week":
-          setDate({
-            from: addDays(today, -7),
-            to: today,
-          });
-          setDateRange("Week");
-
-          return;
-
+          return (
+            <>
+              {format(date.from, "LLL dd y")} - {format(date.to, "LLL dd y")}
+            </>
+          );
         case "Month":
-          setDate({
-            from: new Date(today.getFullYear(), today.getMonth(), 1),
-            to: new Date(today.getFullYear(), today.getMonth() + 1, 0),
-          });
-          setDateRange("Month");
-
-          return;
+          return <>{format(date.from, "LLLL y")}</>;
+        default:
+          throw new Error("Impossible");
       }
-    },
-    []
-  );
+    }, [date, dateRange]);
 
-  return (
-    <div className="w-full flex flex-row justify-between items-center gap-4">
-      <div className="grid gap-2 w-full">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              id="date"
-              variant={"outline"}
-              className={cn(
-                "w-full md:w-fit justify-start text-left font-normal",
-                !date && "text-muted-foreground"
-              )}
-            >
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              {formattedDate}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <div className="flex gap-4 p-3 pb-0">
+    const onDateRangeClick = React.useCallback(
+      (dateRange: RestrictedSelectedDateRange) => {
+        const today = new Date();
+        switch (dateRange) {
+          case "Day":
+            setDate({
+              from: today,
+              to: today,
+            });
+            setDateRange("Day");
+            return;
+
+          case "Week":
+            setDate({
+              from: addDays(today, -7),
+              to: today,
+            });
+            setDateRange("Week");
+
+            return;
+
+          case "Month":
+            setDate({
+              from: new Date(today.getFullYear(), today.getMonth(), 1),
+              to: new Date(today.getFullYear(), today.getMonth() + 1, 0),
+            });
+            setDateRange("Month");
+
+            return;
+        }
+      },
+      [setDate]
+    );
+
+    return (
+      <div className="w-full flex flex-row justify-between items-center gap-4 px-2 md:px-0">
+        <div className="grid gap-2 w-full">
+          <Popover>
+            <PopoverTrigger asChild>
               <Button
+                id="date"
                 variant={"outline"}
-                onClick={() => onDateRangeClick("Day")}
+                className={cn(
+                  "w-full md:w-fit justify-start text-left font-normal",
+                  !date && "text-muted-foreground"
+                )}
               >
-                Today
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {formattedDate}
               </Button>
-              <Button
-                variant={"outline"}
-                onClick={() => onDateRangeClick("Week")}
-              >
-                This Week
-              </Button>
-              <Button
-                variant={"outline"}
-                onClick={() => onDateRangeClick("Month")}
-              >
-                This Month
-              </Button>
-            </div>
-            <Calendar
-              className="hidden md:block"
-              initialFocus
-              mode="range"
-              defaultMonth={date?.from}
-              selected={date}
-              onSelect={(e) => {
-                setDate(e);
-                setDateRange(getDateRangeFromDate(e));
-              }}
-              numberOfMonths={2}
-            />
-            <Calendar
-              className="md:hidden block"
-              initialFocus
-              mode="range"
-              defaultMonth={date?.from}
-              selected={date}
-              onSelect={(e) => {
-                setDate(e);
-                setDateRange(getDateRangeFromDate(e));
-              }}
-              numberOfMonths={1}
-            />
-          </PopoverContent>
-        </Popover>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <div className="flex gap-4 p-3 pb-0">
+                <Button
+                  variant={"outline"}
+                  onClick={() => onDateRangeClick("Day")}
+                >
+                  Today
+                </Button>
+                <Button
+                  variant={"outline"}
+                  onClick={() => onDateRangeClick("Week")}
+                >
+                  This Week
+                </Button>
+                <Button
+                  variant={"outline"}
+                  onClick={() => onDateRangeClick("Month")}
+                >
+                  This Month
+                </Button>
+              </div>
+              <Calendar
+                className="hidden md:block"
+                initialFocus
+                mode="range"
+                defaultMonth={date?.from}
+                selected={date}
+                onSelect={(e) => {
+                  setDate(e);
+                  setDateRange(getDateRangeFromDate(e));
+                }}
+                numberOfMonths={2}
+              />
+              <Calendar
+                className="md:hidden block"
+                initialFocus
+                mode="range"
+                defaultMonth={date?.from}
+                selected={date}
+                onSelect={(e) => {
+                  setDate(e);
+                  setDateRange(getDateRangeFromDate(e));
+                }}
+                numberOfMonths={1}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+
+        <DialogTrigger asChild onClick={onCreateButtonClick}>
+          <Button className="flex-shrink-0 hidden md:block">New Expense</Button>
+        </DialogTrigger>
+        <DialogTrigger asChild onClick={onCreateButtonClick}>
+          <Button size={"icon"} className="flex-shrink-0 block md:hidden">
+            <PlusIcon className="m-auto" />
+          </Button>
+        </DialogTrigger>
       </div>
-
-      <DialogTrigger asChild>
-        <Button className="flex-shrink-0 hidden md:block">New Expense</Button>
-      </DialogTrigger>
-      <DialogTrigger asChild>
-        <Button size={"icon"} className="flex-shrink-0 block md:hidden">
-          <PlusIcon className="m-auto" />
-        </Button>
-      </DialogTrigger>
-    </div>
-  );
-});
+    );
+  }
+);
 
 ExpenseHeader.displayName = "ExpenseHeader";

@@ -42,12 +42,12 @@ export const TopNavigationBar = React.memo(() => {
 
   return (
     <Sheet>
-      <header className="sticky flex-shrink-0 top-0 flex h-[60px] items-center justify-between border-b bg-zinc-100/40 px-4 md:px-6 dark:bg-zinc-800/40">
+      <header className="sticky flex-shrink-0 top-0 flex h-[60px] items-center justify-between border-b bg-zinc-100 px-4 md:px-6 dark:bg-zinc-800/40 z-10">
         <div className="flex gap-3">
-        <SheetTrigger className="block md:hidden">
-          <ColumnIcon />
-        </SheetTrigger>
-        <div className="text-md font-medium">{formattedDate}</div>
+          <SheetTrigger className="block md:hidden">
+            <ColumnIcon />
+          </SheetTrigger>
+          <div className="text-md font-medium">{formattedDate}</div>
         </div>
         <div className="flex gap-2">
           <Button

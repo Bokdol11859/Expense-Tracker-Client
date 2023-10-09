@@ -14,7 +14,7 @@ export default function LoginLayout({
 }) {
   return (
     <div className="flex flex-col overflow-auto h-[calc(100%-60px)]">
-      <main className="flex flex-1 flex-col h-full gap-8 p-3 lg:flex-row">
+      <main className="flex flex-1 flex-col h-full gap-8 p-2 md:p-3 lg:flex-row">
         <div className="flex-1 h-full rounded-lg border border-zinc-200  dark:border-zinc-800 flex">
           <div className="hidden w-full h-full bg-zinc-900 rounded-l-lg xl:block">
             <div className="w-full h-full flex flex-col items-center justify-between p-4">
