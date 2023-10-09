@@ -30,7 +30,7 @@ export const ExpenseTable = React.memo(
   }) => {
     return (
       <Table className=" table-fixed">
-        <TableHeader>
+        <TableHeader className="sticky top-0 bg-white">
           <TableRow>
             <TableHead className="w-[120px] md:w-[160px]">Date</TableHead>
             <TableHead>Description</TableHead>

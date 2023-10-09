@@ -17,6 +17,20 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
     from: new Date(),
     to: addDays(new Date(), 0),
   });
+  const filteredExpenses = expenses.filter((expense) => {
+    if (!date || !date.from) return false;
+
+    if (!date.to)
+      return (
+        date.from.getTime() <= expense.date.getTime() &&
+        expense.date.getTime() < addDays(date.from, 1).getTime()
+      );
+
+    return (
+      date.from.getTime() <= expense.date.getTime() &&
+      expense.date.getTime() < addDays(date.to, 1).getTime()
+    );
+  });
   const [dialogState, setDialogState] =
     React.useState<ExpenseDialogVariant>("Create");
   const [dialogDate, setDialogDate] = React.useState<Date>();
@@ -79,7 +93,10 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
           date={date}
           setDate={setDate}
         />
-        <ExpenseTable onRowClick={setDialogStateToUpdate} expenses={expenses} />
+        <ExpenseTable
+          onRowClick={setDialogStateToUpdate}
+          expenses={filteredExpenses}
+        />
         <ExpenseDialog
           title={dialogTitle}
           date={dialogDate}
