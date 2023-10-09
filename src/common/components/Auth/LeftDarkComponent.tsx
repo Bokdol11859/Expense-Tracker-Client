@@ -3,14 +3,12 @@ import React from "react";
 
 import quotes from "@/quotes.json";
 
-export const LeftDarkComponent = React.memo(() => {
-  const quote = React.useMemo(() => {
-    const idx = Math.floor(Math.random() * quotes.length);
-    return quotes[idx];
-  }, []);
+const idx = Math.floor(Math.random() * quotes.length);
+const quote = quotes[idx];
 
+export const LeftDarkComponent = React.memo(() => {
   return (
-    <div className="hidden w-full h-full bg-zinc-900 rounded-l-lg xl:block">
+    <div className="hidden xl:block w-full h-full bg-zinc-900 rounded-l-lg ">
       <div className="w-full h-full flex flex-col items-center justify-between p-4">
         <div className="w-full text-white flex gap-2 items-center justify-start">
           <CommandIcon />
