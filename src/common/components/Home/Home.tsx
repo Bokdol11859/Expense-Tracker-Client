@@ -8,7 +8,7 @@ import { TopExpense } from "./TopExpense";
 
 export const Home = React.memo(() => {
   return (
-    <div className="w-full h-full overflow-y-scroll gap-4 p-6 flex flex-col lg:grid lg:grid-cols-3 lg:grid-rows-4s">
+    <div className="w-full h-full overflow-y-scroll gap-4 p-3 md:p-6 flex flex-col lg:grid lg:grid-cols-3 lg:grid-rows-4s">
       <ExpenseBarGraph />
       <TotalExpense />
       <TopExpense />
