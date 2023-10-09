@@ -72,7 +72,7 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
   }, [expenses, updateDialog]);
 
   return (
-    <main className="flex flex-1 flex-col gap-4 p-4 px-0 md:gap-6 md:p-6 overflow-y-auto">
+    <main className="flex flex-1 flex-col gap-4 p-4 px-0 md:gap-6 md:p-6 overflow-y-auto w-full">
       <Dialog>
         <ExpenseHeader
           onCreateButtonClick={setDialogStateToCreate}

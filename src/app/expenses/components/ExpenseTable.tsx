@@ -29,12 +29,12 @@ export const ExpenseTable = React.memo(
     onRowClick: (selectedExpenseId: string) => void;
   }) => {
     return (
-      <Table>
+      <Table className=" table-fixed">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[150px]">Date</TableHead>
+            <TableHead className="w-[120px] md:w-[160px]">Date</TableHead>
             <TableHead>Description</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead className="w-[100px] text-right">Amount</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -49,7 +49,9 @@ export const ExpenseTable = React.memo(
                 <TableCell className="font-medium">
                   {formatDate(new Date(expense.date))}
                 </TableCell>
-                <TableCell>{expense.description}</TableCell>
+                <TableCell className="break-words	">
+                  {expense.description}
+                </TableCell>
                 <TableCell className="text-right">${expense.amount}</TableCell>
               </TableRow>
             </DialogTrigger>

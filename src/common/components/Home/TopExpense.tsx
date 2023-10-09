@@ -1,64 +1,46 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { CircleDollarIcon, TrendingUpIcon } from "@/common/icons";
+import { ExpenseTable } from "@/app/expenses/components/ExpenseTable";
+import expenses_ from "@/expense.json";
+import { Expense } from "@/app/expenses/page";
 
-const dummyData: { cost: number; description: string }[] = [
-  {
-    cost: 150,
-    description:
-      "Movie with friendsMovie with friendsMovie with friendsMovie with friendsMovie with friendsMovie with friendsMovie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-  {
-    cost: 150,
-    description: "Movie with friends",
-  },
-];
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+
+function formatDate(date: Date) {
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const dayName = days[date.getDay()];
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // JavaScript months are 0-based
+  const year = date.getFullYear();
+
+  return `${month}/${day}/${year}`;
+}
 
 export const TopExpense = React.memo(() => {
+  const expenses: Expense[] = React.useMemo(
+    () =>
+      expenses_
+        .sort((a, b) => {
+          return b.amount - a.amount;
+        })
+        .map((expense) => {
+          return {
+            ...expense,
+            date: new Date(expense.date),
+          };
+        })
+        .slice(0, 10),
+    []
+  );
+
   return (
     <Card className="col-span-1 row-span-3 flex flex-col w-full">
       <CardHeader className="flex-shrink-0">
@@ -70,30 +52,28 @@ export const TopExpense = React.memo(() => {
         </CardTitle>
       </CardHeader>
       <CardContent className="w-full flex-grow h-[450px] overflow-y-auto px-0">
-        <table className="w-full divide-y border-y-2 divide-zinc-200 dark:divide-zinc-800 overflow-y-scroll">
-          <thead className="bg-zinc-100 dark:bg-zinc-800 text-left">
-            <tr>
-              <th className="px-6 py-3 text-sm text-zinc-500 uppercase tracking-wider">
-                Cost
-              </th>
-              <th className="px-6 py-3 text-sm text-zinc-500 uppercase tracking-wider">
-                Description
-              </th>
-            </tr>
-          </thead>
-          <tbody className="w-full h-full bg-white divide-y divide-zinc-200 dark:bg-zinc-900 dark:divide-zinc-800">
-            {dummyData.map(({ cost, description }) => (
-              <tr key={description}>
-                <td className="px-6 py-4 whitespace-nowrap text-md font-bold text-zinc-900">
-                  ${cost}
-                </td>
-                <td className="flex w-[200px] px-6 py-4 whitespace-nowrap overflow-hidden text-sm text-zinc-900 text-ellipsis">
-                  {description}
-                </td>
-              </tr>
+        <Table className=" table-fixed">
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px] md:w-[120px]">Date</TableHead>
+              <TableHead>Description</TableHead>
+              <TableHead className="w-[100px] text-right">Amount</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {expenses.map((expense: Expense) => (
+              <TableRow key={expense.id} className="cursor-pointer">
+                <TableCell className="font-medium">
+                  {formatDate(new Date(expense.date))}
+                </TableCell>
+                <TableCell className="break-words	">
+                  {expense.description}
+                </TableCell>
+                <TableCell className="text-right">${expense.amount}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </CardContent>
     </Card>
   );
