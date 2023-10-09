@@ -12,10 +12,12 @@ import { Button } from "@/common/components/ui/button";
 
 export type ExpenseDialogVariant = "Create" | "Update";
 
+const today = new Date();
+
 export function Expense({ expenses }: { expenses: ExpenseType[] }) {
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(),
-    to: addDays(new Date(), 0),
+    from: new Date(today.getFullYear(), today.getMonth(), 1),
+    to: new Date(today.getFullYear(), today.getMonth() + 1, 0),
   });
   const filteredExpenses = expenses.filter((expense) => {
     if (!date || !date.from) return false;

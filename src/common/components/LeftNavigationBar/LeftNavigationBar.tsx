@@ -41,7 +41,7 @@ export const LeftNavigationBar = React.memo(
     return (
       <div
         className={cn(
-          "hidden border-r h-full bg-zinc-100/40 md:block dark:bg-zinc-800/40",
+          "hidden border-r h-full bg-zinc-100/40 md:block dark:bg-zinc-800/40 min-w-[250px]",
           isShowing && "block"
         )}
       >
@@ -61,9 +61,9 @@ export const LeftNavigationBar = React.memo(
               })}
             </nav>
           </div>
-          <div className="flex items-center justify-center pb-4">
+          {/* <div className="flex items-center justify-center pb-4">
             <Calendar initialFocus mode="single" />
-          </div>
+          </div> */}
         </div>
       </div>
     );

@@ -48,7 +48,8 @@ export const ExpenseHeader = React.memo(
     setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
     onCreateButtonClick: () => void;
   }) => {
-    const [dateRange, setDateRange] = React.useState<SelectedDateRange>("Day");
+    const [dateRange, setDateRange] =
+      React.useState<SelectedDateRange>("Month");
 
     const formattedDate = React.useMemo((): React.ReactElement => {
       if (!date || !date.from || !date.to) return <span>Pick a date</span>;
