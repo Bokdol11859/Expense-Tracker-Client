@@ -8,28 +8,6 @@ import { ColumnIcon } from "@/common/icons";
 import { LeftNavigationBar } from "../LeftNavigationBar";
 import { DatePicker } from "./DatePicker";
 
-const currentDate = new Date();
-
-// Array of month names
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-const formattedDate = `${
-  monthNames[currentDate.getMonth()]
-} ${currentDate.getFullYear()}`;
-
 export const TopNavigationBar = React.memo(() => {
   const router = useRouter();
 
