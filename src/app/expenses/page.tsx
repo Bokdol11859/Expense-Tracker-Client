@@ -1,5 +1,8 @@
+"use client";
+
 import { Expense } from "@/app/expenses/components/Expense";
-import expenses_ from "@/expense.json";
+import { filteredExpenseAtom } from "@/common/atoms/ExpenseAtom";
+import { useAtomValue } from "jotai";
 
 export type Expense = {
   id: string;
@@ -9,12 +12,9 @@ export type Expense = {
 };
 
 export default function Page() {
-  const expenses = expenses_.map((expense) => {
-    return {
-      ...expense,
-      date: new Date(expense.date),
-    };
-  });
+  const expenses = useAtomValue(filteredExpenseAtom).sort(
+    (a, b) => b.date.getTime() - a.date.getTime()
+  );
 
   return <Expense expenses={expenses} />;
 }

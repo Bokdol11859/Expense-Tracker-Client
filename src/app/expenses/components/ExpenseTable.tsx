@@ -29,7 +29,7 @@ export const ExpenseTable = React.memo(
     onRowClick: (selectedExpenseId: string) => void;
   }) => {
     return (
-      <Table className=" table-fixed">
+      <Table className="table-fixed">
         <TableHeader className="sticky top-0 bg-white">
           <TableRow>
             <TableHead className="w-[120px] md:w-[160px]">Date</TableHead>

@@ -1,16 +1,8 @@
 "use client";
 
-import {
-  DashboardIcon,
-  ExpenseIcon,
-  HomeIcon,
-  LogoIcon,
-  StockIcon,
-} from "@/common/icons";
+import { DashboardIcon, ExpenseIcon, LogoIcon } from "@/common/icons";
 import Link from "next/link";
-import React, { MemoExoticComponent } from "react";
-import { Calendar } from "@/common/components/ui/calendar";
-import { usePathname } from "next/navigation";
+import React from "react";
 import { Tab } from "./Tab";
 import { cn } from "@/common/lib/utils";
 

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { ColumnIcon } from "@/common/icons";
 import { LeftNavigationBar } from "../LeftNavigationBar";
+import { DatePicker } from "./DatePicker";
 
 const currentDate = new Date();
 
@@ -47,7 +48,7 @@ export const TopNavigationBar = React.memo(() => {
           <SheetTrigger className="block md:hidden">
             <ColumnIcon />
           </SheetTrigger>
-          <div className="text-md font-medium">{formattedDate}</div>
+          <DatePicker />
         </div>
         <div className="flex gap-2">
           <Button

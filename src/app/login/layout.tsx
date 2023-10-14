@@ -1,5 +1,4 @@
 import { LeftDarkComponent } from "@/common/components/Auth/LeftDarkComponent";
-import { CommandIcon } from "@/common/icons";
 import { Metadata } from "next";
 import React from "react";
 

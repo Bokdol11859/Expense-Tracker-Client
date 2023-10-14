@@ -1,43 +1,24 @@
 "use client";
 
-import { ExpenseHeader } from "./ExpenseHeader";
+// import { ExpenseHeader } from "./ExpenseHeader";
 import { ExpenseTable } from "./ExpenseTable";
 import { ExpenseDialog } from "./ExpenseDialog";
 import { Dialog } from "@/common/components/ui/dialog";
 import React from "react";
-import { DateRange } from "react-day-picker";
-import { addDays } from "date-fns";
 import { Expense as ExpenseType } from "../page";
 import { Button } from "@/common/components/ui/button";
+import { DialogTrigger } from "node_modules/@radix-ui/react-dialog/dist/index.mjs";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 export type ExpenseDialogVariant = "Create" | "Update";
 
-const today = new Date();
-
 export function Expense({ expenses }: { expenses: ExpenseType[] }) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(today.getFullYear(), today.getMonth(), 1),
-    to: new Date(today.getFullYear(), today.getMonth() + 1, 0),
-  });
-  const filteredExpenses = expenses.filter((expense) => {
-    if (!date || !date.from) return false;
-
-    if (!date.to)
-      return (
-        date.from.getTime() <= expense.date.getTime() &&
-        expense.date.getTime() < addDays(date.from, 1).getTime()
-      );
-
-    return (
-      date.from.getTime() <= expense.date.getTime() &&
-      expense.date.getTime() < addDays(date.to, 1).getTime()
-    );
-  });
   const [dialogState, setDialogState] =
     React.useState<ExpenseDialogVariant>("Create");
   const [dialogDate, setDialogDate] = React.useState<Date>();
   const [dialogDescription, setDialogDescription] = React.useState<string>();
   const [dialogAmount, setDialogAmount] = React.useState<number>();
+
   const dialogTitle = React.useMemo(
     () =>
       dialogState === "Create"
@@ -45,6 +26,7 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
         : "Update Expense Record",
     [dialogState]
   );
+
   const dialogFooterButton = React.useMemo(
     () =>
       dialogState === "Create" ? (
@@ -70,35 +52,26 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
     []
   );
 
-  const setDialogStateToCreate = React.useMemo(() => {
-    return () => {
-      setDialogState("Create");
-      resetDialog();
-    };
+  const setDialogStateToCreate = React.useCallback(() => {
+    setDialogState("Create");
+    resetDialog();
   }, [resetDialog]);
 
-  const setDialogStateToUpdate = React.useMemo(() => {
-    return (selectedExpenseId: string) => {
+  const setDialogStateToUpdate = React.useCallback(
+    (selectedExpenseId: string) => {
       setDialogState("Update");
       const targetExpense = expenses.find(
         (expense) => expense.id === selectedExpenseId
       );
       updateDialog({ ...targetExpense });
-    };
-  }, [expenses, updateDialog]);
+    },
+    [expenses, updateDialog]
+  );
 
   return (
-    <main className="flex flex-1 flex-col gap-4 p-4 px-0 md:gap-6 md:p-6 overflow-y-auto w-full">
+    <main className="relative flex flex-1 flex-col gap-4 p-4 px-0 md:gap-6 md:p-6 overflow-y-auto w-full">
       <Dialog>
-        <ExpenseHeader
-          onCreateButtonClick={setDialogStateToCreate}
-          date={date}
-          setDate={setDate}
-        />
-        <ExpenseTable
-          onRowClick={setDialogStateToUpdate}
-          expenses={filteredExpenses}
-        />
+        <ExpenseTable onRowClick={setDialogStateToUpdate} expenses={expenses} />
         <ExpenseDialog
           title={dialogTitle}
           date={dialogDate}
@@ -109,6 +82,14 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
           setAmount={setDialogAmount}
           footerButton={dialogFooterButton}
         />
+        <DialogTrigger>
+          <div
+            onClick={setDialogStateToCreate}
+            className=" absolute bottom-6 right-6 w-10 h-10 rounded-full bg-black text-white flex items-center justify-center"
+          >
+            <PlusIcon width={24} height={24} />
+          </div>
+        </DialogTrigger>
       </Dialog>
     </main>
   );
