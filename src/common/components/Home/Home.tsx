@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 
 import { ExpenseBarGraph } from "./ExpensebarGraph";
 import { TotalExpense } from "./TotalExpense";
@@ -20,7 +20,9 @@ export const Home = React.memo(() => {
   );
   return (
     <div className="w-full h-full overflow-y-scroll gap-4 p-3 md:p-6 flex flex-col lg:grid lg:grid-cols-3 lg:grid-rows-4s">
-      <ExpenseBarGraph expenses={expensesSortedByDate} />
+      <Suspense fallback={<></>}>
+        <ExpenseBarGraph expenses={expensesSortedByDate} />
+      </Suspense>
       <TotalExpense expenses={expenses} />
       <TopExpense expenses={expensesSortedByPrice} />
     </div>
