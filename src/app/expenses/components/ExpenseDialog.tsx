@@ -99,7 +99,9 @@ export const ExpenseDialog = React.memo(
             <Input
               type="number"
               value={amount}
-              onChange={(e) => setAmount(Number(e.target.value))}
+              onChange={(e) =>
+                setAmount(Number(Number(e.target.value).toFixed(2)))
+              }
               id="amount"
               placeholder="74,000"
               className="col-span-3"

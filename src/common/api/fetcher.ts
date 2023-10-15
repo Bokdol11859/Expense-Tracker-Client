@@ -9,7 +9,9 @@ export const getExpenseById = async (id: string): Promise<Expense> => {
   return (await AxiosInstance.get(`/expense/${id}`)).data;
 };
 
-export const createExpense = async (expense: Expense): Promise<Expense> => {
+export const createExpense = async (
+  expense: Omit<Expense, "id">
+): Promise<Expense> => {
   return (await AxiosInstance.post("/expense", expense)).data;
 };
 

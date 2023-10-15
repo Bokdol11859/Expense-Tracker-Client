@@ -5,12 +5,13 @@ import { getAllExpense } from "@/common/api/fetcher";
 import { expenseAtom } from "@/common/atoms/ExpenseAtom";
 import { useQuery } from "@tanstack/react-query";
 import { useSetAtom } from "jotai";
+import { KEYS } from "@/keys";
 
 export const DataIntializer = React.memo(() => {
   const setExpense = useSetAtom(expenseAtom);
 
   useQuery({
-    queryKey: ["expenses"],
+    queryKey: [KEYS.expenses],
     queryFn: async () => {
       const data = (await getAllExpense()).map((expense) => {
         return {

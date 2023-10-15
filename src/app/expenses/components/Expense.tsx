@@ -2,21 +2,37 @@
 
 import { ExpenseTable } from "./ExpenseTable";
 import { ExpenseDialog } from "./ExpenseDialog";
-import { Dialog } from "@/common/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogTrigger,
+} from "@/common/components/ui/dialog";
 import React from "react";
 import { Expense as ExpenseType } from "../page";
 import { Button } from "@/common/components/ui/button";
-import { DialogTrigger } from "node_modules/@radix-ui/react-dialog/dist/index.mjs";
 import { PlusIcon } from "@radix-ui/react-icons";
+import { useQueryClient } from "@tanstack/react-query";
+import { createExpense, updateExpense } from "@/common/api/fetcher";
+import { KEYS } from "@/keys";
+import { Expense } from "@/common/entities/expense.entity";
 
 export type ExpenseDialogVariant = "Create" | "Update";
 
+const cleanExpense = (expense: Partial<Expense>) => {
+  return Object.fromEntries(
+    Object.entries(expense).filter(([key, value]) => value !== undefined)
+  );
+};
+
 export function Expense({ expenses }: { expenses: ExpenseType[] }) {
+  const queryClient = useQueryClient();
+
   const [dialogState, setDialogState] =
     React.useState<ExpenseDialogVariant>("Create");
   const [dialogDate, setDialogDate] = React.useState<Date>();
   const [dialogDescription, setDialogDescription] = React.useState<string>();
   const [dialogAmount, setDialogAmount] = React.useState<number>();
+  const [selectedId, setSelectedId] = React.useState<string>();
 
   const dialogTitle = React.useMemo(
     () =>
@@ -26,17 +42,52 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
     [dialogState]
   );
 
+  const handleCreateButtonClick = React.useCallback(async () => {
+    if (!dialogDate || !dialogDescription || !dialogAmount) return;
+
+    try {
+      await createExpense({
+        date: dialogDate.toDateString(),
+        description: dialogDescription,
+        amount: dialogAmount,
+      });
+      queryClient.invalidateQueries([KEYS.expenses]);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [dialogAmount, dialogDate, dialogDescription, queryClient]);
+
+  const handleUpdateButtonClick = React.useCallback(async () => {
+    if (!selectedId) return;
+    console.log("clicked");
+    try {
+      await updateExpense(
+        selectedId,
+        cleanExpense({
+          date: dialogDate?.toDateString(),
+          description: dialogDescription,
+          amount: dialogAmount,
+        })
+      );
+      queryClient.invalidateQueries([KEYS.expenses]);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [dialogAmount, dialogDate, dialogDescription, queryClient, selectedId]);
+
   const dialogFooterButton = React.useMemo(
     () =>
       dialogState === "Create" ? (
-        <Button>{"Create"}</Button>
+        <DialogClose asChild>
+          <Button onClick={handleCreateButtonClick}>{"Create"}</Button>
+        </DialogClose>
       ) : (
-        <Button>{"Update"}</Button>
+        <DialogClose asChild>
+          <Button onClick={handleUpdateButtonClick}>{"Update"}</Button>
+        </DialogClose>
       ),
-    [dialogState]
+    [dialogState, handleCreateButtonClick, handleUpdateButtonClick]
   );
-
-  const handleCreateButtonClick = React.useCallback(() => {}, []);
 
   const resetDialog = React.useCallback(() => {
     setDialogDate(undefined);
@@ -65,6 +116,7 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
         (expense) => expense.id === selectedExpenseId
       );
       updateDialog({ ...targetExpense });
+      setSelectedId(selectedExpenseId);
     },
     [expenses, updateDialog]
   );
