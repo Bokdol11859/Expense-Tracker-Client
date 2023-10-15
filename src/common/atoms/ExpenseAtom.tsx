@@ -2,18 +2,8 @@ import { atom } from "jotai";
 import { Expense } from "@/app/expenses/page";
 import { dateAtom } from "./DateAtom";
 import { addDays } from "date-fns";
-import expenses from "@/expense.json";
 
-export const expenseAtom = atom<Expense[]>(
-  expenses
-    ? expenses.map((expense) => {
-        return {
-          ...expense,
-          date: new Date(expense.date),
-        };
-      })
-    : []
-);
+export const expenseAtom = atom<Expense[]>([]);
 
 export const filteredExpenseAtom = atom<Expense[]>((get) =>
   get(expenseAtom).filter((expense) => {

@@ -1,6 +1,5 @@
 "use client";
 
-// import { ExpenseHeader } from "./ExpenseHeader";
 import { ExpenseTable } from "./ExpenseTable";
 import { ExpenseDialog } from "./ExpenseDialog";
 import { Dialog } from "@/common/components/ui/dialog";
