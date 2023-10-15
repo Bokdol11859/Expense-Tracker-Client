@@ -1,6 +1,11 @@
 "use client";
 
-import { dateAtom } from "@/common/atoms/DateAtom";
+import {
+  RestrictedSelectedDateRange,
+  SelectedDateRange,
+  dateAtom,
+  dateRangeAtom,
+} from "@/common/atoms/DateAtom";
 import { addDays, differenceInCalendarDays, format } from "date-fns";
 import { useAtom } from "jotai";
 import React from "react";
@@ -8,9 +13,6 @@ import { DateRange } from "react-day-picker";
 import { Calendar } from "../ui/calendar";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-
-type SelectedDateRange = "Day" | "Week" | "Month" | "Free" | "Null";
-type RestrictedSelectedDateRange = "Day" | "Week" | "Month";
 
 const isFullMonthDifference = (start: Date, end: Date): boolean => {
   if (start.getDate() !== 1) return false;
@@ -34,7 +36,7 @@ const getDateRangeFromDate = (
 
 export const DatePicker = React.memo(() => {
   const [date, setDate] = useAtom(dateAtom);
-  const [dateRange, setDateRange] = React.useState<SelectedDateRange>("Month");
+  const [dateRange, setDateRange] = useAtom(dateRangeAtom);
   const formattedDate = React.useMemo((): React.ReactElement => {
     if (!date || !date.from || !date.to) return <span>Pick a date</span>;
 
@@ -86,7 +88,7 @@ export const DatePicker = React.memo(() => {
           return;
       }
     },
-    [setDate]
+    [setDate, setDateRange]
   );
 
   return (

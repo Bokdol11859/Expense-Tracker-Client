@@ -36,6 +36,8 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
     [dialogState]
   );
 
+  const handleCreateButtonClick = React.useCallback(() => {}, []);
+
   const resetDialog = React.useCallback(() => {
     setDialogDate(undefined);
     setDialogDescription(undefined);
