@@ -12,7 +12,11 @@ import { Expense as ExpenseType } from "../page";
 import { Button } from "@/common/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
-import { createExpense, updateExpense } from "@/common/api/fetcher";
+import {
+  createExpense,
+  deleteExpense,
+  updateExpense,
+} from "@/common/api/fetcher";
 import { KEYS } from "@/keys";
 import { Expense } from "@/common/entities/expense.entity";
 
@@ -59,7 +63,7 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
 
   const handleUpdateButtonClick = React.useCallback(async () => {
     if (!selectedId) return;
-    console.log("clicked");
+
     try {
       await updateExpense(
         selectedId,
@@ -75,6 +79,16 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
     }
   }, [dialogAmount, dialogDate, dialogDescription, queryClient, selectedId]);
 
+  const handleDeleteButtonClick = React.useCallback(async () => {
+    if (!selectedId) return;
+    try {
+      await deleteExpense(selectedId);
+      queryClient.invalidateQueries([KEYS.expenses]);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [queryClient, selectedId]);
+
   const dialogFooterButton = React.useMemo(
     () =>
       dialogState === "Create" ? (
@@ -82,9 +96,16 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
           <Button onClick={handleCreateButtonClick}>{"Create"}</Button>
         </DialogClose>
       ) : (
-        <DialogClose asChild>
-          <Button onClick={handleUpdateButtonClick}>{"Update"}</Button>
-        </DialogClose>
+        <div className="w-full flex items-center justify-between">
+          <DialogClose asChild>
+            <Button onClick={handleDeleteButtonClick} variant={"destructive"}>
+              {"Delete"}
+            </Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button onClick={handleUpdateButtonClick}>{"Update"}</Button>
+          </DialogClose>
+        </div>
       ),
     [dialogState, handleCreateButtonClick, handleUpdateButtonClick]
   );
