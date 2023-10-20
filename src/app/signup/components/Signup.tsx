@@ -9,13 +9,16 @@ import { User } from "@/common/entities/user.entity";
 import { signup } from "@/common/api/fetcher";
 import { cn } from "@/common/lib/utils";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/common/components/ui/use-toast";
 
-const regex = new RegExp(
+const emailRegex = new RegExp("/^[^s@]+@[^s@]+.[^s@]+$/");
+const passwordRegex = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$"
 );
 
 export const Signup = React.memo(() => {
   const router = useRouter();
+  const { toast } = useToast();
 
   const [user, setUser] = React.useState<User & { passwordValidation: string }>(
     {
@@ -28,24 +31,30 @@ export const Signup = React.memo(() => {
   );
 
   const isPasswordValid = React.useMemo(() => {
-    return regex.test(user.password);
+    return passwordRegex.test(user.password);
   }, [user.password]);
+
+  const isEmailValid = React.useMemo(() => {
+    return emailRegex.test(user.email);
+  }, [user.email]);
 
   const isPasswordMatching = React.useMemo(() => {
     return user.password === user.passwordValidation;
   }, [user.password, user.passwordValidation]);
 
-  const isFormSubmittable = React.useMemo(() => {
+  const isFormValid = React.useMemo(() => {
     return (
       user.firstName &&
       user.lastName &&
       user.email &&
       user.password &&
       user.passwordValidation &&
+      isEmailValid &&
       isPasswordMatching &&
       isPasswordValid
     );
   }, [
+    isEmailValid,
     isPasswordMatching,
     isPasswordValid,
     user.email,
@@ -69,14 +78,22 @@ export const Signup = React.memo(() => {
   );
 
   const handleSignupButtonClick = React.useCallback(async () => {
-    if (!isFormSubmittable) return;
+    if (!isFormValid) return;
     try {
       await signup(user);
+      toast({
+        duration: 3000,
+        title: "Signup successful!",
+      });
       router.push("/login");
     } catch (e: any) {
-      console.error(e);
+      toast({
+        variant: "destructive",
+        duration: 3000,
+        title: e.response.data.message,
+      });
     }
-  }, [isFormSubmittable, router, user]);
+  }, [isFormValid, router, toast, user]);
 
   return (
     <div className="p-2 md:p-6 flex items-center justify-center h-full w-full">
@@ -156,8 +173,8 @@ export const Signup = React.memo(() => {
         <Button
           className={cn(
             "w-full",
-            !isFormSubmittable &&
-              "cursor-not-allowed bg-gray-300 hover:bg-gray-300"
+            !isFormValid &&
+              "cursor-not-allowed bg-gray-300 hover:bg-gray-300 shadow-none"
           )}
           onClick={handleSignupButtonClick}
         >

@@ -32,3 +32,7 @@ export const signup = async (
 ): Promise<Partial<User> & { createdAt: string }> => {
   return (await AxiosInstance.post(`/user`, user)).data;
 };
+
+export const login = async (user: Pick<User, "email" | "password">) => {
+  return (await AxiosInstance.post("/user/login", user)).data;
+};

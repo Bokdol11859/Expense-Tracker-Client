@@ -6,6 +6,7 @@ import { inter } from "./font";
 import { RootProvider } from "./RootProvider";
 
 import "./globals.css";
+import { Toaster } from "@/common/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Expense Tracker",
@@ -26,6 +27,7 @@ export default function RootLayout({
             <div className="flex flex-col w-full h-full">
               <TopNavigationBar />
               {children}
+              <Toaster />
               <Analytics />
             </div>
           </div>
