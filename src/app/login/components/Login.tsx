@@ -10,7 +10,7 @@ import { useToast } from "@/common/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { cn } from "@/common/lib/utils";
 
-const emailRegex = new RegExp("/^[^s@]+@[^s@]+.[^s@]+$/");
+const emailRegex = new RegExp("^[^s@]+@[^s@]+.[^s@]+$");
 const passwordRegex = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$"
 );
