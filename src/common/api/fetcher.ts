@@ -1,4 +1,5 @@
 import { Expense } from "../entities/expense.entity";
+import { User } from "../entities/user.entity";
 import { AxiosInstance } from "./axios";
 
 export const getAllExpense = async (): Promise<Expense[]> => {
@@ -24,4 +25,10 @@ export const updateExpense = async (
 
 export const deleteExpense = async (id: string): Promise<Expense> => {
   return (await AxiosInstance.delete(`/expense/${id}`)).data;
+};
+
+export const signup = async (
+  user: User
+): Promise<Partial<User> & { createdAt: string }> => {
+  return (await AxiosInstance.post(`/user`, user)).data;
 };

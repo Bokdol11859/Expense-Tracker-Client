@@ -1,6 +1,11 @@
 "use client";
 
-import { DashboardIcon, ExpenseIcon, LogoIcon } from "@/common/icons";
+import {
+  DashboardIcon,
+  ExpenseIcon,
+  LogoIcon,
+  SettingIcon,
+} from "@/common/icons";
 import Link from "next/link";
 import React from "react";
 import { Tab } from "./Tab";
@@ -53,6 +58,11 @@ export const LeftNavigationBar = React.memo(
               })}
             </nav>
           </div>
+          {/* <div className="px-4 py-6 text-sm font-medium">
+            <div className="flex items-center gap-3 rounded-lg bg-zinc-100 px-3 py-2 text-zinc-900 transition-all hover:text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:text-zinc-50">
+              <SettingIcon />
+            </div>
+          </div> */}
           {/* <div className="flex items-center justify-center pb-4">
             <Calendar initialFocus mode="single" />
           </div> */}

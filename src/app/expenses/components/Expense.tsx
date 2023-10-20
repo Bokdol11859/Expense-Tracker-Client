@@ -107,7 +107,12 @@ export function Expense({ expenses }: { expenses: ExpenseType[] }) {
           </DialogClose>
         </div>
       ),
-    [dialogState, handleCreateButtonClick, handleUpdateButtonClick]
+    [
+      dialogState,
+      handleCreateButtonClick,
+      handleDeleteButtonClick,
+      handleUpdateButtonClick,
+    ]
   );
 
   const resetDialog = React.useCallback(() => {
