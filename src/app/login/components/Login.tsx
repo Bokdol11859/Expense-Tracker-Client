@@ -20,34 +20,39 @@ export const Login = React.memo(() => {
   const { toast } = useToast();
   const router = useRouter();
 
-  const { setAccessToken, setUserInfo } = useAuth();
+  const { setAccessToken, setUser } = useAuth();
 
-  const [user, setUser] = React.useState({
+  const [userForm, setUserForm] = React.useState({
     email: "",
     password: "",
   });
 
   const isPasswordValid = React.useMemo(() => {
-    return passwordRegex.test(user.password);
-  }, [user.password]);
+    return passwordRegex.test(userForm.password);
+  }, [userForm.password]);
 
   const isEmailValid = React.useMemo(() => {
-    return emailRegex.test(user.email);
-  }, [user.email]);
+    return emailRegex.test(userForm.email);
+  }, [userForm.email]);
 
   const isFormValid = React.useMemo(() => {
     return (
-      user.email.length > 0 &&
-      user.password.length > 0 &&
+      userForm.email.length > 0 &&
+      userForm.password.length > 0 &&
       isPasswordValid &&
       isEmailValid
     );
-  }, [isEmailValid, isPasswordValid, user.email.length, user.password.length]);
+  }, [
+    isEmailValid,
+    isPasswordValid,
+    userForm.email.length,
+    userForm.password.length,
+  ]);
 
   const handleInputChange = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
-      setUser((prev) => {
+      setUserForm((prev) => {
         return {
           ...prev,
           [name]: value,
@@ -59,9 +64,12 @@ export const Login = React.memo(() => {
 
   const onSigninButtonClick = React.useCallback(async () => {
     try {
-      const { access_token, email, firstName, lastName } = await login(user);
+      const { access_token, email, firstName, lastName } = await login(
+        userForm
+      );
       setAccessToken(access_token);
-      setUserInfo({
+      setUser({
+        accessToken: access_token,
         email,
         firstName,
         lastName,
@@ -79,7 +87,7 @@ export const Login = React.memo(() => {
         title: e.response.data.message,
       });
     }
-  }, [router, setAccessToken, setUserInfo, toast, user]);
+  }, [router, setAccessToken, setUser, toast, userForm]);
 
   return (
     <div className=" p-2 md:p-6 h-full flex items-center justify-center ">

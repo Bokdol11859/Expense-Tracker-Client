@@ -29,6 +29,7 @@ export function useLocalStorage<T>(
         setStoredValue(JSON.parse(e.newValue!));
       }
     };
+
     window.addEventListener("storage", handleStorageChange);
     return () => {
       window.removeEventListener("storage", handleStorageChange);

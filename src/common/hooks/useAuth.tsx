@@ -1,28 +1,27 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import { useLocalStorage } from "./useLocalStorage"; // Adjust the import path accordingly
-import { User } from "../entities/user.entity";
+import { useAtom } from "jotai";
+import { UserAtomType, userAtom } from "../atoms/UserAtom";
 
-export function useAuth(): {
-  isLoggedIn: boolean;
-  userInfo: Omit<User, "password"> | null;
-  setUserInfo: (value: Omit<User, "password"> | null) => void;
-  setAccessToken: (value: string) => void;
-  logOut: () => void;
-} {
+export function useAuth() {
+  const [user, setUser] = useAtom(userAtom);
   const [accessToken, setAccessToken] = useLocalStorage("accessToken", "");
-  const [userInfo, setUserInfo] = useLocalStorage<Omit<
-    User,
-    "password"
-  > | null>("userInfo", null);
 
   const isLoggedIn = React.useMemo(() => {
-    return Boolean(accessToken);
-  }, [accessToken]);
+    return Boolean(user);
+  }, [user]);
 
   const logOut = React.useCallback(() => {
     setAccessToken("");
-    setUserInfo(null);
-  }, [setAccessToken, setUserInfo]);
+    setUser(null);
+  }, [setAccessToken, setUser]);
 
-  return { isLoggedIn, userInfo, setUserInfo, setAccessToken, logOut };
+  React.useEffect(() => {
+    if (accessToken) {
+      // to implement auto login
+      // fetch user data from access token;
+    }
+  }, [accessToken, setUser]);
+
+  return { isLoggedIn, user, setUser, setAccessToken, logOut };
 }
