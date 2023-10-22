@@ -33,6 +33,8 @@ export const signup = async (
   return (await AxiosInstance.post(`/user`, user)).data;
 };
 
-export const login = async (user: Pick<User, "email" | "password">) => {
+export const login = async (
+  user: Pick<User, "email" | "password">
+): Promise<Omit<User, "password"> & { access_token: string }> => {
   return (await AxiosInstance.post("/user/login", user)).data;
 };

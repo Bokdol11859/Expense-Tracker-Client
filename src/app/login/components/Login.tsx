@@ -9,6 +9,7 @@ import { login } from "@/common/api/fetcher";
 import { useToast } from "@/common/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { cn } from "@/common/lib/utils";
+import { useAuth } from "@/common/hooks/useAuth";
 
 const emailRegex = new RegExp("^[^s@]+@[^s@]+.[^s@]+$");
 const passwordRegex = new RegExp(
@@ -18,6 +19,8 @@ const passwordRegex = new RegExp(
 export const Login = React.memo(() => {
   const { toast } = useToast();
   const router = useRouter();
+
+  const { setAccessToken, setUserInfo } = useAuth();
 
   const [user, setUser] = React.useState({
     email: "",
@@ -56,7 +59,13 @@ export const Login = React.memo(() => {
 
   const onSigninButtonClick = React.useCallback(async () => {
     try {
-      await login(user);
+      const { access_token, email, firstName, lastName } = await login(user);
+      setAccessToken(access_token);
+      setUserInfo({
+        email,
+        firstName,
+        lastName,
+      });
       toast({
         duration: 3000,
         title: "Login Successful!",
@@ -70,7 +79,7 @@ export const Login = React.memo(() => {
         title: e.response.data.message,
       });
     }
-  }, [router, toast, user]);
+  }, [router, setAccessToken, setUserInfo, toast, user]);
 
   return (
     <div className=" p-2 md:p-6 h-full flex items-center justify-center ">

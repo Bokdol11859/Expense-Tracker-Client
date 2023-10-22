@@ -4,12 +4,24 @@ import React from "react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import { ColumnIcon } from "@/common/icons";
+import { ColumnIcon, SettingIcon, UserIcon } from "@/common/icons";
 import { LeftNavigationBar } from "../LeftNavigationBar";
 import { DatePicker } from "./DatePicker";
+import { useAuth } from "@/common/hooks/useAuth";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 export const TopNavigationBar = React.memo(() => {
   const router = useRouter();
+
+  const { isLoggedIn, userInfo } = useAuth();
 
   const handleLoginClick = React.useCallback(() => {
     router.push("/login");
@@ -28,18 +40,54 @@ export const TopNavigationBar = React.memo(() => {
           </SheetTrigger>
           <DatePicker />
         </div>
-        <div className="flex gap-2">
-          <Button
-            className="px-4 py-2"
-            variant="outline"
-            onClick={handleLoginClick}
-          >
-            Login
-          </Button>
-          <Button className="px-4 py-2" onClick={handleSignupClick}>
-            Sign Up
-          </Button>
-        </div>
+        {isLoggedIn ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar className="cursor-pointer border border-gray-300">
+                <AvatarImage src="https://avatars.githubusercontent.com/u/80627536?v=4" />
+                <AvatarFallback>EP</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className=" absolute w-56 -right-5 overflow-hidden">
+              <div className="flex gap-2 items-center justify-start px-1 py-1.5">
+                <Avatar className=" border border-gray-300">
+                  <AvatarImage src="https://avatars.githubusercontent.com/u/80627536?v=4" />
+                  <AvatarFallback>EP</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="py-0 pl-0 text-sm font-semibold">
+                    {userInfo?.firstName} {userInfo?.lastName}
+                  </p>
+                  <p className="py-0 pl-0 text-xs text-gray-500">
+                    {userInfo?.email}
+                  </p>
+                </div>
+              </div>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="flex justify-start gap-2 items-center cursor-pointer p-2">
+                <UserIcon />
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem className="flex justify-start gap-2 items-center cursor-pointer p-2">
+                <SettingIcon />
+                Setting
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <div className="flex gap-2">
+            <Button
+              className="px-4 py-2"
+              variant="outline"
+              onClick={handleLoginClick}
+            >
+              Login
+            </Button>
+            <Button className="px-4 py-2" onClick={handleSignupClick}>
+              Sign Up
+            </Button>
+          </div>
+        )}
       </header>
       <SheetContent className="p-0" side={"left"}>
         <LeftNavigationBar isShowing />
